@@ -23,7 +23,13 @@ const DataTable = inject(({ models }) => {
 
   return (
     <div>
-      <Button loading={models.rest.posts.loading.index} onClick={models.rest.posts.index}>Fetch Posts</Button>
+      <Button
+        style={{ marginBottom: '1em' }}
+        loading={models.rest.posts.loading.index}
+        onClick={models.rest.posts.index}
+      >
+        Fetch Posts
+      </Button>
       <Table
         rowKey='id'
         loading={models.rest.posts.loading.index}

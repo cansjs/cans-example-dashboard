@@ -30,7 +30,7 @@ const App = () => {
           </Menu>
         </Header>
       </Layout>
-      <Content>
+      <Content style={{ padding: '10px 50px' }}>
         <Route exact path='/' component={Home} />
         <Route path='/curd' component={Curd} />
       </Content>
