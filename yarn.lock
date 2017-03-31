@@ -1112,6 +1112,10 @@ cans-plugin-http@^0.0.4:
   dependencies:
     axios "^0.15.3"
 
+cans-plugin-modal-store@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/cans-plugin-modal-store/-/cans-plugin-modal-store-0.0.3.tgz#f8189ec42456ad71fb5e7527c79cf7e1b0c2914f"
+
 cans@^0.0.10:
   version "0.0.10"
   resolved "https://registry.npmjs.org/cans/-/cans-0.0.10.tgz#f35dbf227ef66de0c0a905b13d9c320d5f178901"
