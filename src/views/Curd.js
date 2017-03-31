@@ -60,7 +60,7 @@ const DataTable = inject(({ models }) => {
 })
 
 const CreatePostModal = Form.create()(inject(({ models, form }) => {
-  const { getFieldDecorator, validateFields } = form
+  const { getFieldDecorator, validateFields, resetFields } = form
   const create = () => { 
     validateFields(async (err, values) => {
       if (!err) {
@@ -68,6 +68,7 @@ const CreatePostModal = Form.create()(inject(({ models, form }) => {
         try {
           await models.rest.posts.create(values)
           models.modals.createPost.hide()
+          resetFields()
           message.success('success')
         } catch (e) {
           message.error(e.message)
