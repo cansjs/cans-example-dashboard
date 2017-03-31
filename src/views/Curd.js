@@ -2,7 +2,8 @@ import React from 'react'
 import { inject } from 'cans'
 import {
   Table,
-  Button
+  Button,
+  message
 } from 'antd'
 
 const DataTable = inject(({ models }) => {
@@ -13,11 +14,33 @@ const DataTable = inject(({ models }) => {
     },
     {
       title: 'title',
-      dataIndex: 'title'
+      dataIndex: 'title',
+      width: 300
     },
     {
       title: 'body',
       dataIndex: 'body'
+    },
+    {
+      title: 'operations',
+      render (value, post) {
+        const del = async () => {
+          try {
+            await models.rest.posts.delete(post.id)
+            message.success('success')
+          } catch (e) {
+            message.error(e.message)
+          }
+        }
+        return (
+          <span>
+            <a href="#">Edit</a>
+            <span className="ant-divider" />
+            <a onClick={del}>Delete</a>
+            <span className="ant-divider" />
+          </span>
+        )
+      }
     }
   ]
 
@@ -32,7 +55,7 @@ const DataTable = inject(({ models }) => {
       </Button>
       <Table
         rowKey='id'
-        loading={models.rest.posts.loading.index}
+        loading={models.rest.posts.loading.index || models.rest.posts.loading.delete}
         columns={columns}
         dataSource={models.rest.posts.data.index}
       />
