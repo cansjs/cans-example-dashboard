@@ -11,7 +11,7 @@ const app = cans()
 
 app.use(restPlugin, {
   resources: [
-    { name: 'posts', url: 'http://jsonplaceholder.typicode.com' }
+    { name: 'posts', url: 'http://jsonplaceholder.typicode.com', total: (res) => res.headers['x-total-count'] }
   ]
 })
 

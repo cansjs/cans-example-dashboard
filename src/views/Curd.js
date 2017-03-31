@@ -9,6 +9,8 @@ import {
   Input
 } from 'antd'
 
+const PAGE_SIZE = 10
+
 const DataTable = inject(({ models }) => {
   const columns = [
     {
@@ -50,12 +52,21 @@ const DataTable = inject(({ models }) => {
     }
   ]
 
+  const onTableChange = (pagination) => {
+    const pageSize = pagination.pageSize
+    const page = pagination.current
+
+    models.rest.posts.index({ params: { _page: page, _limit: pageSize } })
+  }
+
   return (
     <div>
       <Table
         rowKey='id'
         loading={models.rest.posts.loading.index || models.rest.posts.loading.delete}
         columns={columns}
+        onChange={onTableChange}
+        pagination={{ total: models.rest.posts.pagination.total, pageSize: PAGE_SIZE }}
         dataSource={models.rest.posts.data.index}
       />
     </div>
@@ -110,13 +121,14 @@ const CreatePostModal = Form.create()(inject(({ models, form }) => {
 }))
 
 const Curd = inject(({ models }) => {
+  const fetch = () => { models.rest.posts.index({ params: { _page: 1, _limit: PAGE_SIZE } }) }
   return (
     <div>
       <div style={{ marginBottom: '1em' }}>
         <Button
           style={{ marginRight: '1em' }}
           loading={models.rest.posts.loading.index}
-          onClick={models.rest.posts.index}
+          onClick={fetch}
         >Fetch Posts</Button>
         <Button
           type='primary'
