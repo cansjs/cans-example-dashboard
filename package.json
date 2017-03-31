@@ -8,6 +8,7 @@
   "dependencies": {
     "antd": "^2.8.3",
     "cans": "^0.0.10",
+    "cans-plugin-http": "^0.0.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
