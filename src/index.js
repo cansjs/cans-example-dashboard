@@ -16,7 +16,9 @@ app.use(restPlugin, {
 })
 
 app.use(modalStorePlugin, {
-  names: ['createPost']
+  modals: [
+    { name: 'post', title: (record) => record.id ? 'Edit post' : 'New post' }
+  ]
 })
 
 app.route(() => (

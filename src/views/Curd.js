@@ -35,9 +35,12 @@ const DataTable = inject(({ models }) => {
             message.error(e.message)
           }
         }
+        const edit = () => {
+          models.modals.post.show(post)
+        }
         return (
           <span>
-            <a href="#">Edit</a>
+            <a onClick={edit}>Edit</a>
             <span className="ant-divider" />
             <a onClick={del}>Delete</a>
             <span className="ant-divider" />
@@ -64,36 +67,40 @@ const CreatePostModal = Form.create()(inject(({ models, form }) => {
   const create = () => { 
     validateFields(async (err, values) => {
       if (!err) {
-        models.modals.createPost.startLoading()
+        models.modals.post.startLoading()
         try {
-          await models.rest.posts.create(values)
-          models.modals.createPost.hide()
+          if (models.modals.post.record.id) {
+            await models.rest.posts.update(models.modals.post.record.id, values)
+          } else {
+            await models.rest.posts.create(values)
+          }
+          models.modals.post.hide()
           resetFields()
           message.success('success')
         } catch (e) {
           message.error(e.message)
         } finally {
-          models.modals.createPost.stopLoading()
+          models.modals.post.stopLoading()
         }
       }
     })
   }
   return (
     <Modal
-      title='New Post'
-      visible={models.modals.createPost.visible}
+      title={models.modals.post.title}
+      visible={models.modals.post.visible}
       onOk={create}
-      onCancel={models.modals.createPost.hide}
-      confirmLoading={models.modals.createPost.confirmLoading}
+      onCancel={models.modals.post.hide}
+      confirmLoading={models.modals.post.confirmLoading}
     >
       <Form>
         <Form.Item label='title'>
-          {getFieldDecorator('title', { rules: [{ required: true }] })(
+          {getFieldDecorator('title', { initialValue: models.modals.post.record.title , rules: [{ required: true }] })(
             <Input />
           )}
         </Form.Item>
         <Form.Item label='body'>
-          {getFieldDecorator('body')(
+          {getFieldDecorator('body', { initialValue: models.modals.post.record.body })(
             <Input type='textarea' />
           )}
         </Form.Item>
@@ -114,7 +121,7 @@ const Curd = inject(({ models }) => {
         <Button
           type='primary'
           style={{ marginRight: '1em' }}
-          onClick={models.modals.createPost.show}
+          onClick={models.modals.post.show}
         >New Post</Button>
       </div>
       <CreatePostModal />
