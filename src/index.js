@@ -1,7 +1,10 @@
 import cans from 'cans'
+import { useStrict } from 'cans/mobx'
 import React from 'react'
 import { BrowserRouter } from 'cans/router'
 import App from './App'
+
+useStrict(true)
 
 // cans plugins
 import { restPlugin } from 'cans-plugin-http'

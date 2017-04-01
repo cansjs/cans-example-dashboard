@@ -1106,9 +1106,9 @@ caniuse-db@^1.0.30000346, caniuse-db@^1.0.30000618, caniuse-db@^1.0.30000639:
   version "1.0.30000646"
   resolved "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000646.tgz#c724b90d61df24286e015fc528d062073c00def4"
 
-cans-plugin-http@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.npmjs.org/cans-plugin-http/-/cans-plugin-http-0.0.4.tgz#f9abb7f3b4d76aea04abb216636b7a3a8b6eddfb"
+cans-plugin-http@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.npmjs.org/cans-plugin-http/-/cans-plugin-http-0.0.6.tgz#fb49812a78781d7f3731409cfcdde63ff6bdfe38"
   dependencies:
     axios "^0.15.3"
 
