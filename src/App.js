@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Link } from 'cans/router'
 import 'antd/dist/antd.css'
+import DevTools from 'mobx-react-devtools'
 
 import {
   Layout,
@@ -16,6 +17,7 @@ const Content = Layout.Content
 const App = () => {
   return (
     <div>
+      <DevTools />
       <Layout>
         <Header>
           <Menu
